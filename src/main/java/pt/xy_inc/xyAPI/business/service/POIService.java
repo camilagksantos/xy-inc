@@ -7,6 +7,7 @@ import pt.xy_inc.xyAPI.repository.POIRepository;
 import pt.xy_inc.xyAPI.repository.entity.POIEntity;
 import pt.xy_inc.xyAPI.repository.mapper.POIRepositoryMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,5 +32,18 @@ public class POIService {
         POIEntity savedPoi = poiRepository.save(poiEntity);
 
         return poiRepositoryMapper.toPoi(savedPoi);
+    }
+
+    public List<POI> getPoisByCoordinates(Integer coordenadaX, Integer coordenadaY, Integer dmax) {
+        List<POIEntity> pois = poiRepository.findAll();
+        List<POIEntity> poisByCoordinates = new ArrayList<POIEntity>();
+
+        for (POIEntity poi : pois) {
+            if ( (Math.abs(poi.getCoordenadaX() - coordenadaX) + Math.abs(poi.getCoordenadaY() - coordenadaY)) <= dmax) {
+                poisByCoordinates.add(poi);
+            }
+        }
+
+        return poiRepositoryMapper.toPoiList(poisByCoordinates);
     }
 }

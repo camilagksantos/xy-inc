@@ -36,5 +36,11 @@ public class POIController {
         return poiControllerMapper.toPOIResponseDTO(createdPoi);
     }
 
+    @GetMapping("/{coordenadaX}/{coordenadaY}/{dmax}")
+    public List<POIResponseDTO> getPoisByCoordinates(@PathVariable("coordenadaX") Integer coordenadaX, @PathVariable("coordenadaY") Integer coordenadaY, @PathVariable("dmax") Integer dMax) {
+        List<POI> poisByCoordinates = poiService.getPoisByCoordinates(coordenadaX, coordenadaY, dMax);
 
+        return poiControllerMapper.toPOIResponseDTOList(poisByCoordinates);
+    }
 }
+

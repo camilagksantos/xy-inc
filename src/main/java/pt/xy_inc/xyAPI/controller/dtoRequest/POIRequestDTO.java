@@ -1,9 +1,16 @@
 package pt.xy_inc.xyAPI.controller.dtoRequest;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
+
 public class POIRequestDTO {
 
     private String nomePoi;
+
+    @Min(value = 0, message = "This coordenate must be positive")
     private Integer coordenadaX;
+
+    @Min(value = 0, message = "This coordenate must be positive")
     private Integer coordenadaY;
 
     public String getNomePoi() {
