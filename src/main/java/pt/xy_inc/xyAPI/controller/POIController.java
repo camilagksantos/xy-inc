@@ -1,9 +1,10 @@
 package pt.xy_inc.xyAPI.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import pt.xy_inc.xyAPI.business.model.POI;
 import pt.xy_inc.xyAPI.business.service.POIService;
+import pt.xy_inc.xyAPI.controller.dtoRequest.POIRequestDTO;
 import pt.xy_inc.xyAPI.controller.dtoResponse.POIResponseDTO;
 import pt.xy_inc.xyAPI.controller.mapper.POIControllerMapper;
 
@@ -25,4 +26,15 @@ public class POIController {
     public List<POIResponseDTO> getAllPois() {
         return poiControllerMapper.toPOIResponseDTOList(poiService.getAllPois());
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public POIResponseDTO createPoi(@RequestBody POIRequestDTO poiRequestDTO) {
+        POI poi = poiControllerMapper.toPOI(poiRequestDTO);
+        POI createdPoi = poiService.createPoi(poi);
+
+        return poiControllerMapper.toPOIResponseDTO(createdPoi);
+    }
+
+
 }

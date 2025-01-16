@@ -25,4 +25,11 @@ public class POIService {
         List<POIEntity> pois = poiRepository.findAll();
         return poiRepositoryMapper.toPoiList(pois);
     }
+
+    public POI createPoi(POI poi) {
+        POIEntity poiEntity = poiRepositoryMapper.toPOIEntity(poi);
+        POIEntity savedPoi = poiRepository.save(poiEntity);
+
+        return poiRepositoryMapper.toPoi(savedPoi);
+    }
 }
