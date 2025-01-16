@@ -1,7 +1,7 @@
 USE bd_xy_api;
 
 -- Inserir pessoas na tabela 'poi'
-INSERT INTO poi (id, nomePoi, coordenadaX, coordenadaY) VALUES
+INSERT INTO poi (id, nome_poi, coordenadaX, coordenadaY) VALUES
 (1, 'Lanchonete', 27, 12),
 (2, 'Posto', 31, 18),
 (3, 'Joalheria', 15, 12),
