@@ -1,1 +1,16 @@
+pt/xy_inc/xyAPI/repository/entity/POIEntity.class
+pt/xy_inc/xyAPI/business/exceptions/NotFoundException.class
+pt/xy_inc/xyAPI/controller/dtoResponse/POIResponseDTO.class
+pt/xy_inc/xyAPI/controller/dtoRequest/POIRequestDTO.class
 pt/xy_inc/xyAPI/XyApiApplication.class
+pt/xy_inc/xyAPI/controller/mapper/POIControllerMapper.class
+pt/xy_inc/xyAPI/config/handler/ErrorResponse.class
+pt/xy_inc/xyAPI/config/handler/GlobalExceptionHandler.class
+pt/xy_inc/xyAPI/business/model/POI.class
+pt/xy_inc/xyAPI/repository/POIRepository.class
+pt/xy_inc/xyAPI/business/service/POIService.class
+pt/xy_inc/xyAPI/business/exceptions/NegativeNumberException.class
+pt/xy_inc/xyAPI/repository/mapper/POIRepositoryMapper.class
+pt/xy_inc/xyAPI/controller/POIController.class
+pt/xy_inc/xyAPI/controller/mapper/POIControllerMapperImpl.class
+pt/xy_inc/xyAPI/repository/mapper/POIRepositoryMapperImpl.class

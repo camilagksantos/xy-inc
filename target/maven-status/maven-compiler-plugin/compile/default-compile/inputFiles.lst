@@ -1,1 +1,14 @@
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/config/handler/GlobalExceptionHandler.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/repository/POIRepository.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/config/handler/ErrorResponse.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/controller/dtoRequest/POIRequestDTO.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/business/exceptions/NegativeNumberException.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/controller/mapper/POIControllerMapper.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/repository/entity/POIEntity.java
 /Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/XyApiApplication.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/repository/mapper/POIRepositoryMapper.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/business/model/POI.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/controller/dtoResponse/POIResponseDTO.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/business/exceptions/NotFoundException.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/controller/POIController.java
+/Users/camilakfouri/Documents/Java/testeZup XY API/xyAPI/src/main/java/pt/xy_inc/xyAPI/business/service/POIService.java
