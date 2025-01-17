@@ -1,5 +1,7 @@
 package pt.xy_inc.xyAPI.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/pois")
+@Tag(name = "POI", description = "API de Pontos de Interesse")
 public class POIController {
 
     private final POIService poiService;
@@ -23,11 +26,19 @@ public class POIController {
         this.poiControllerMapper = poiControllerMapper;
     }
 
+    @Operation(
+            summary = "Buscar POIs por coordenadas",
+            description = "Retorna todos os POIs."
+    )
     @GetMapping
     public List<POIResponseDTO> getAllPois() {
         return poiControllerMapper.toPOIResponseDTOList(poiService.getAllPois());
     }
 
+    @Operation(
+            summary = "Cria um POI",
+            description = "Retorna o POI criado"
+    )
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public POIResponseDTO createPoi(@RequestBody @Valid POIRequestDTO poiRequestDTO) {
@@ -37,6 +48,10 @@ public class POIController {
         return poiControllerMapper.toPOIResponseDTO(createdPoi);
     }
 
+    @Operation(
+            summary = "Buscar POIs por coordenadas",
+            description = "Retorna todos os POIs dentro da distância máxima especificada"
+    )
     @GetMapping("/{coordenadaX}/{coordenadaY}/{dmax}")
     public List<POIResponseDTO> getPoisByCoordinates(@PathVariable("coordenadaX") Integer coordenadaX, @PathVariable("coordenadaY") Integer coordenadaY, @PathVariable("dmax") Integer dMax) {
         List<POI> poisByCoordinates = poiService.getPoisByCoordinates(coordenadaX, coordenadaY, dMax);
