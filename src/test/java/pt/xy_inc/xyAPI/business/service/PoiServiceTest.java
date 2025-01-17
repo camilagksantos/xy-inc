@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import pt.xy_inc.xyAPI.business.exceptions.NegativeNumberException;
 import pt.xy_inc.xyAPI.business.model.POI;
 import pt.xy_inc.xyAPI.repository.POIRepository;
 import pt.xy_inc.xyAPI.repository.entity.POIEntity;
@@ -14,6 +15,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -88,43 +91,40 @@ public class PoiServiceTest {
 
     @Test
     void shouldGetPoiByCoordenada(){
-        Integer coordenadaX = 20;
-        Integer coordenadaY = 10;
-        Integer dMax = 10;
+        // Given
+        POIEntity poiEntity = new POIEntity();
+        poiEntity.setId(1L);
+        poiEntity.setNomePoi("Test POI");
+        poiEntity.setCoordenadaX(10);
+        poiEntity.setCoordenadaY(10);
 
-        POIEntity poiEntity1 = new POIEntity();
-        poiEntity1.setId(1L);
-        poiEntity1.setNomePoi("Padaria");
-        poiEntity1.setCoordenadaX(22);
-        poiEntity1.setCoordenadaY(15);
-        POIEntity poiEntity2 = new POIEntity();
-        poiEntity2.setId(2L);
-        poiEntity2.setNomePoi("Supermercado");
-        poiEntity2.setCoordenadaX(40);
-        poiEntity2.setCoordenadaY(15);
-        POIEntity poiEntity3 = new POIEntity();
-        poiEntity3.setId(3L);
-        poiEntity3.setNomePoi("Loja de Roupas");
-        poiEntity3.setCoordenadaX(32);
-        poiEntity3.setCoordenadaY(17);
+        POI expectedPoi = new POI();
+        expectedPoi.setId(1L);
+        expectedPoi.setNomePoi("Test POI");
+        expectedPoi.setCoordenadaX(10);
+        expectedPoi.setCoordenadaY(10);
 
-        POI expectedPoi1 = new POI();
-        expectedPoi1.setId(1L);
-        expectedPoi1.setNomePoi("Padaria");
-        expectedPoi1.setCoordenadaX(22);
-        expectedPoi1.setCoordenadaY(15);
+        // When
+        when(poiRepository.findPoisWithinDistance(anyInt(), anyInt(), anyInt()))
+                .thenReturn(List.of(poiEntity));
+        when(poiRepositoryMapper.toPoiList(List.of(poiEntity)))
+                .thenReturn(List.of(expectedPoi));
 
-        List<POIEntity> poisEntityByCoordenate = Arrays.asList(poiEntity1);
+        // Then
+        List<POI> result = poiService.getPoisByCoordinates(20, 10, 10);
+        assertEquals(1, result.size());
+        assertEquals(expectedPoi, result.get(0));
+    }
 
-        when(poiRepository.findAll()).thenReturn(Arrays.asList(poiEntity1, poiEntity2, poiEntity3));
-        when(poiRepositoryMapper.toPoiList(poisEntityByCoordenate)).thenReturn(Arrays.asList(expectedPoi1));
+    @Test
+    void shouldThrowExceptionWhenCoordinatesAreNegative() {
+        assertThrows(NegativeNumberException.class, () ->
+                poiService.getPoisByCoordinates(-1, 10, 10));
 
-        //Act
-        List<POI> poisByCoordenates = poiService.getPoisByCoordinates(coordenadaX, coordenadaY, dMax);
+        assertThrows(NegativeNumberException.class, () ->
+                poiService.getPoisByCoordinates(10, -1, 10));
 
-        //Assert
-        assertEquals(expectedPoi1, poisByCoordenates.get(0));
-        verify(poiRepositoryMapper).toPoiList(poisEntityByCoordenate);
-        verify(poiRepository).findAll();
+        assertThrows(NegativeNumberException.class, () ->
+                poiService.getPoisByCoordinates(10, 10, -1));
     }
 }

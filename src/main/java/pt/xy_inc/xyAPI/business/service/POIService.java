@@ -2,6 +2,7 @@ package pt.xy_inc.xyAPI.business.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import pt.xy_inc.xyAPI.business.exceptions.NegativeNumberException;
 import pt.xy_inc.xyAPI.business.model.POI;
 import pt.xy_inc.xyAPI.repository.POIRepository;
 import pt.xy_inc.xyAPI.repository.entity.POIEntity;
@@ -35,15 +36,12 @@ public class POIService {
     }
 
     public List<POI> getPoisByCoordinates(Integer coordenadaX, Integer coordenadaY, Integer dmax) {
-        List<POIEntity> pois = poiRepository.findAll();
-        List<POIEntity> poisByCoordinates = new ArrayList<POIEntity>();
-
-        for (POIEntity poi : pois) {
-            if ( (Math.abs(poi.getCoordenadaX() - coordenadaX) + Math.abs(poi.getCoordenadaY() - coordenadaY)) <= dmax) {
-                poisByCoordinates.add(poi);
-            }
+        if (coordenadaX < 0 || coordenadaY < 0 || dmax < 0){
+            throw new NegativeNumberException("Coordinates must not be null");
         }
 
-        return poiRepositoryMapper.toPoiList(poisByCoordinates);
+        List<POIEntity> pois = poiRepository.findPoisWithinDistance(coordenadaX, coordenadaY, dmax);
+
+        return poiRepositoryMapper.toPoiList(pois);
     }
 }

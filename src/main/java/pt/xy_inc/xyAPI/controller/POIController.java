@@ -1,5 +1,6 @@
 package pt.xy_inc.xyAPI.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pt.xy_inc.xyAPI.business.model.POI;
@@ -29,7 +30,7 @@ public class POIController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public POIResponseDTO createPoi(@RequestBody POIRequestDTO poiRequestDTO) {
+    public POIResponseDTO createPoi(@RequestBody @Valid POIRequestDTO poiRequestDTO) {
         POI poi = poiControllerMapper.toPOI(poiRequestDTO);
         POI createdPoi = poiService.createPoi(poi);
 
